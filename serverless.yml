@@ -1,7 +1,9 @@
-# NOTE: update this with your service name
-service: notes-app-api
+# Locally test functions : sls invoke local --function hello
 
-# Create an optimized package for our functions 
+# NOTE: update this with your service name
+service: serverless-notes-api
+
+# Create an optimized package for our functions (quicker cold start)
 package:
   individually: true
 
@@ -12,9 +14,9 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs12.x
   stage: dev
-  region: us-east-1
+  region: eu-west-3
   # To load environment variables externally
   # rename env.example to .env and uncomment
   # the following line. Also, make sure to not
