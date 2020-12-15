@@ -1,4 +1,7 @@
-# Locally test functions : sls invoke local --function create --path mocks/create-event.json
+# Locally test functions : 
+# sls invoke local --function create --path mocks/create-event.json
+# sls invoke local --function get --path mocks/get-event.json
+# sls deploy --aws-profile myProfile
 
 # NOTE: update this with your service name
 service: serverless-notes-api
@@ -48,5 +51,27 @@ functions:
       - http:
           path: notes
           method: post
-
-
+  get:
+    handler: get.main
+    events:
+      - http:
+          path: notes/{id}
+          method: get 
+  list:
+    handler: list.main
+    events:
+      - http:
+          path: notes
+          method: get     
+  update:
+    handler: update.main
+    events:
+      - http:
+          path: notes/{id}
+          method: put  
+  delete:
+    handler: delete.main
+    events:
+      - http:
+          path: notes/{id}
+          method: delete             
