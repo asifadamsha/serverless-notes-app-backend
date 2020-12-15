@@ -1,7 +1,8 @@
 # Locally test functions : 
-# sls invoke local --function create --path mocks/create-event.json
+# sls invoke local --function create --path mocks/create-event.json // for local testing
 # sls invoke local --function get --path mocks/get-event.json
-# sls deploy --aws-profile myProfile
+# sls deploy --aws-profile myProfile // deploy all
+# sls deploy function -f list // deploy single
 
 # NOTE: update this with your service name
 service: serverless-notes-api
@@ -51,27 +52,32 @@ functions:
       - http:
           path: notes
           method: post
+          authorizer: aws_iam
   get:
     handler: get.main
     events:
       - http:
           path: notes/{id}
           method: get 
+          authorizer: aws_iam
   list:
     handler: list.main
     events:
       - http:
           path: notes
-          method: get     
+          method: get
+          authorizer: aws_iam     
   update:
     handler: update.main
     events:
       - http:
           path: notes/{id}
           method: put  
+          authorizer: aws_iam
   delete:
     handler: delete.main
     events:
       - http:
           path: notes/{id}
-          method: delete             
+          method: delete    
+          authorizer: aws_iam         
