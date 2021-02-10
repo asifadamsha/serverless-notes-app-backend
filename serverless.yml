@@ -54,6 +54,7 @@ functions:
           path: notes
           method: post
           authorizer: aws_iam
+          cors: true
   get:
     handler: get.main
     events:
@@ -61,13 +62,15 @@ functions:
           path: notes/{id}
           method: get 
           authorizer: aws_iam
+          cors: true
   list:
     handler: list.main
     events:
       - http:
           path: notes
           method: get
-          authorizer: aws_iam     
+          authorizer: aws_iam
+          cors: true
   update:
     handler: update.main
     events:
@@ -75,6 +78,7 @@ functions:
           path: notes/{id}
           method: put  
           authorizer: aws_iam
+          cors: true
   delete:
     handler: delete.main
     events:
@@ -82,10 +86,17 @@ functions:
           path: notes/{id}
           method: delete    
           authorizer: aws_iam
+          cors: true
   billing:
     handler: billing.main
     events:
       - http:
           path: billing
           method: post    
-          authorizer: aws_iam                 
+          authorizer: aws_iam
+          cors: true
+
+resources:
+  #API Gateway errors
+  - ${file(resources/api-gateway-errors.yml)}  
+                   
